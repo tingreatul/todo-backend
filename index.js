@@ -23,7 +23,7 @@ app.post("/todos", validateTodo, (req, res) => {
 
 // READ ALL TODOS
 app.get("/", (req, res) => {
-  res.json(todos);
+  res.send(todos);
 });
 
 // GET TODOS BY ID
@@ -32,7 +32,7 @@ app.get("/todos/:id", (req, res) => {
   const todo = todos.find((todo) => todo.id === id);
   if (!todo)
     return res.status(404).send("The todo with given ID was not found.");
-  res.json(todo);
+  res.send(todo);
 });
 
 // UPDATE TODO
@@ -45,7 +45,7 @@ app.put("/todos/:id", validateTodo, (req, res) => {
   todo.task = req.body.task;
   todo.completed = req.body.completed;
 
-  res.json(todo);
+  res.send(todo);
 });
 
 // DELETE TODO
@@ -58,7 +58,7 @@ app.delete("/todos/:id", (req, res) => {
   const index = todos.indexOf(todo);
   todos.splice(index, 1);
 
-  res.json(todo);
+  res.send(todo);
 });
 
 const port = process.env.PORT || 8080;
